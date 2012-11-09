@@ -1,0 +1,16 @@
+name:                fuzzy-set
+version:             0.1.0.0
+synopsis:            Fuzzy sets
+license:             MIT
+license-file:        LICENSE
+author:              Sam T.
+maintainer:          sta.cs.vsu@gmail.com
+-- category:            
+build-type:          Simple
+cabal-version:       >=1.8
+
+library
+  exposed-modules:   
+--  other-modules:       Data.Fuzzy.Mu
+  build-depends:       base ==4.5.*
+  ghc-options:         -O3 -Wall 
