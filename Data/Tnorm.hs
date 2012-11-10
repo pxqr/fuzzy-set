@@ -1,12 +1,15 @@
 -- | This module defines triangular norm which dual to triangular conorm and it's instances.
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving, FlexibleInstances, UndecidableInstances #-}
 module Data.Tnorm 
        ( Tnorm(..), (/*\)
+       -- * Monoid
+       , Monoid
        -- * Instances
        , Min(..), Product(..), Lukasiewicz(..), Drastic(..)
        , NilpotentMin(..), HamacherProd(..)
        ) where 
 
+import Data.Monoid (Monoid (..))
 -- | Generalization of intersection in a lattice and conjunction in logic.
 --   Laws:
 --     * associativity: (a `tnorm` b) `tnorm` c = a `tnorm` (b `tnorm` c)
@@ -24,6 +27,11 @@ module Data.Tnorm
 class (Ord a, Num a) => Tnorm a where 
   tnorm :: a -> a -> a
   tnorm = min
+
+-- Since tnorm forms a monoid.
+instance Tnorm a => Monoid a where
+  mempty  = 1
+  mappend = tnorm
 
 -- | Alias to 'tnorm'. Name choosed this way to not shade 'Control.Applicative.(<*>)'
 {-# INLINE (/*\) #-}
